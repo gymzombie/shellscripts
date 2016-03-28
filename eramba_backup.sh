@@ -1,9 +1,11 @@
 #!/bin/bash
 # Simple script to back up Eramba folder and backups
-# You will definitely want to use "sudo" to execute this.
+# You will probably want to use "sudo" to execute this.
+
 # Edit sources here:
 
 eramba_root="/var/www/html/eramba_v2/"
+        # This is where your backups will go. Create this location before running. 
 backup_root="/home/user/eramba_backups/"
 eramba_dbname="eramba_enterprise"
 
