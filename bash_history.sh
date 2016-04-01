@@ -1,8 +1,8 @@
 # Not really a bash_history, but a scratchpad to keep commands that I pickup or use
 # and want to keep handy. Some sysadmin stuff, some pentesty stuff. 
 
-apt-get upgrade | tee upgrade-$( date +%F ).log
-openssl s_client -connect customer.website.com:443
+apt-get upgrade | tee upgrade-$( date +%F ).log # Runs an upgrade and outputs to stdout as well as to a logfile
+openssl s_client -connect customer.website.com:443 # Connect to a website over SSL like HTTP
 sudo service ntpd stop
 sudo service mysql start
 sudo service mysql status
