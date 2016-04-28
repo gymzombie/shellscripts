@@ -76,6 +76,7 @@ pgrep rsync | xargs ionice -c3 -p # Adjust all rsync processes on the system so 
 grep -h "POST /.*wp-login.php" *-access_log |awk '$1!~/^my.ip.addr$/{print $1}' |sort|uniq -c|sort -nr |head -50> wp-abusers.txt # WP abuse
 ps wu -U someuser # An easy way of selecting the processes owned by someuser.
 (head -5; tail -5) < log # Show the first and last 5 lines of the file 'log'.
+script upgrade.log # script is a nice program that allows you to record your interactive shell session. Great for logging upgrades.
 
 
 
