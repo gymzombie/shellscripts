@@ -77,6 +77,7 @@ grep -h "POST /.*wp-login.php" *-access_log |awk '$1!~/^my.ip.addr$/{print $1}' 
 ps wu -U someuser # An easy way of selecting the processes owned by someuser.
 (head -5; tail -5) < log # Show the first and last 5 lines of the file 'log'.
 script upgrade.log # script is a nice program that allows you to record your interactive shell session. Great for logging upgrades.
+less -S file.txt # The -S turns off word wrap and allows scrolling to side. Great for logfiles. 
 
 
 
