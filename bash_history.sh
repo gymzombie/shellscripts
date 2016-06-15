@@ -81,6 +81,6 @@ less -S file.txt # The -S turns off word wrap and allows scrolling to side. Grea
 sed -i 's/^[ \t]*//' somefile # trim leading whitespace
 sed -i 's/^[ \t]*//;s/[ \t]*$//' somefile # Trim leading and trailing whitespace: 
 grep -n alpha $(grep -Irl beta *)   # grep for 'alpha', but only in files that also contain 'beta':
-
+echo "fuzzbuzz" | sed -e "s/u/i/2" # Replace the second occurrence of a regex match.
 
 
