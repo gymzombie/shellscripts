@@ -15,9 +15,24 @@ sudo apt-get install lamp-server^
 netstat -an
 iotop
 top
+
+
+# fail2ban config
+sudo apt-get install fail2ban                    # Initial install
+sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local       # one time to copy and make non-default edits
+sudo nano /etc/fail2ban/jail.local   # edit the local configs to make your own
+sudo service fail2ban restart     # restart fail2ban to implement the new configs
+sudo fail2ban-client status     # get info about the current configuration of fail2ban
+sudo iptables -S  # see the current blocklist
+sudo fail2ban-client status apache   # Show the configuration for the "apache" filters
+sudo fail2ban-client set apache unbanip 111.111.111.111 # Remove an IP from the banned IP list
+
+# NTP
 cat /etc/default/ntp
 sudo vi /etc/default/ntp
 sudo service ntp restart
+
+
 netstat -ant
 for file in $(ls -1 .); do if [ -s "$file" ]; then rm $file; fi; done
 sudo apt-get install java
@@ -25,11 +40,11 @@ sudo apt-get search java
 apt-get -h
 sudo apt-get install metasploit
 sudo apt-get install msfconsole
-ls
 ./quick-msf-setup 
 sudo ./quick-msf-setup 
 source ~/.bashrc
 ls
+ls -X    # Group files by extension
 ssh -l username -p 2222 localhost
 ssh root@127.0.0.1 -p 2244
 uname -a
