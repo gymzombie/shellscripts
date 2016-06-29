@@ -43,7 +43,6 @@ sudo apt-get install msfconsole
 ./quick-msf-setup 
 sudo ./quick-msf-setup 
 source ~/.bashrc
-ls
 ls -X    # Group files by extension
 ssh -l username -p 2222 localhost
 ssh root@127.0.0.1 -p 2244
