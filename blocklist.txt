@@ -1,0 +1,86 @@
+## Sites and domains that I block. These are well above and beyond the paranoia level 
+## of most people
+
+## These are totally custom. Anything that wasn't blocked by a script,
+## I put it in here myself. Probably the FIRST place to start when looking to troubleshoot
+## problems :-P
+
+
+ru
+cn
+ua
+tw
+cc
+was
+tt
+asia
+at
+click
+club
+country
+eu
+link
+mobi
+rocks
+website
+
+## from the "most abused" list from http://www.surbl.org/tld
+pw
+xyz
+tk
+xn--p1ai
+vn
+
+// porn
+sextingselfshots.com
+
+
+adadvisor.ne
+crashlytics.com
+ru4.com
+media6degrees.com
+adsymptotic.com
+in-appadvertising.com
+switchads.com
+adohana.com
+adform.ne
+veruta.com
+smartadserver.com
+apjoyads.com
+mopub.com
+appsflyer.com
+innovid.com
+doubleverify.com
+vindicosuite.com
+lijit.com
+adtechus.com
+burstnet.com
+criteo.com
+sonobi.com
+gumgum.com
+crwdcntrl.net
+chartboost.com
+ooyala.com
+zemanta.com
+ijreview.com
+
+# These are from da_667 as hosting malware:
+
+american-pride-carpetcleaning.org
+1111casino.com
+ptcruiserusedparts.com
+buckbice.com
+hamptoninnairportdayton.com
+flacozbrain.org
+nynycabaret
+wionlinedriversed.org
+almond.nyc
+yormgtconcepts.com
+ancientkemetic.us
+nowigs.com
+aubreyclemons.us
+verfallpro.com
+stolenitem.com
+athomeimprovement.net
+
+
