@@ -52,7 +52,7 @@
 #          creates: /usr/local/rvm/config/alias
       environment:
           PATH: "{{ rvm_path }}:{{ ansible_env.PATH }}"
-      command: "rvm use {{ ruby_version }} --default
+      command: "rvm use {{ ruby_version }} --default"
 
     - name: Make sure Rollbar Agent is updated
       pip: name=rollbar-agent state=latest
