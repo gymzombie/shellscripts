@@ -1,0 +1,40 @@
+---
+
+- hosts: vulnreport
+
+  tasks:
+    - name: Update with apt-get update/upgrade
+      apt: upgrade=dist update_cache=yes cache_valid_time=3600
+
+    - name: ensure postgresql is at the latest version
+      apt: name=postgresql state=latest
+
+    - name: ensure that postgresql is started
+      service: name=postgresql state=started
+
+    - name: Install important apps for VulnReport
+      apt: name={{item}} state=installed update_cache=true
+      with_items:
+        - ruby
+        - redis-tools
+        - bundler
+        - wkhtmltopdf
+        - python-pip
+        - git
+
+    - name: Make sure Rollbar Agent is updated
+      pip: name=rollbar-agent state=latest
+
+    - name: Install other fun tools
+      apt: name={{item}} state=installed update_cache=true
+      with_items:
+        - tmux
+        - tree
+        - fail2ban
+        - aide
+        - psad
+        - logwatch
+
+    - name: Download VulnReport from Repo
+      git: repo=https://github.com/salesforce/vulnreport.git
+           dest=/opt/vulnreport
