@@ -2,6 +2,12 @@
 
 - hosts: vulnreport
 
+  vars:
+    vulnreport_install_dir: "/opt/vulnreport"
+
+    ruby_version: "2.1.2"
+    rvm_path: "/usr/local/rvm/gems/ruby-{{ ruby_version }}/bin:/usr/local/rvm/gems/ruby-{{ ruby_version }}@global/bin:/usr/local/rvm/rubies/ruby-{{ ruby_version }}/bin:/usr/local/rvm/bin"
+
   tasks:
     - name: Update with apt-get update/upgrade
       apt: upgrade=dist update_cache=yes cache_valid_time=3600
@@ -15,12 +21,38 @@
     - name: Install important apps for VulnReport
       apt: name={{item}} state=installed update_cache=true
       with_items:
-        - ruby
         - redis-tools
         - bundler
         - wkhtmltopdf
         - python-pip
         - git
+        - curl
+        - gnupg2
+
+    - name: append rvm path to environment
+      lineinfile: dest=/etc/environment state=present backrefs=yes regexp='PATH=(["]*)((?!.*?{{rvm_path}}).*?)(["]*)$' line="PATH=\1\2:{{rvm_path}}\3"
+
+    - name: ensure that GPG key for RVM is installed
+      shell: "curl -sSL https://rvm.io/mpapis.asc | gpg --import -"
+
+    - name: ensure that RVM is installed
+      shell: curl -L get.rvm.io | bash -s stable
+      args:
+          creates: /usr/local/rvm
+  - name: ensure that ruby is installed
+      command: "rvm install {{ ruby_version }}"
+      args:
+          creates: "/usr/local/rvm/gems/ruby-{{ ruby_version }}"
+      environment:
+          PATH: "{{ rvm_path }}:{{ ansible_env.PATH }}"
+
+    - name: set default version of ruby with rvm
+      command: "rvm alias create default ruby-{{ ruby_version }}"
+#      args:
+#          creates: /usr/local/rvm/config/alias
+      environment:
+          PATH: "{{ rvm_path }}:{{ ansible_env.PATH }}"
+      command: "rvm use {{ ruby_version }} --default
 
     - name: Make sure Rollbar Agent is updated
       pip: name=rollbar-agent state=latest
@@ -37,4 +69,9 @@
 
     - name: Download VulnReport from Repo
       git: repo=https://github.com/salesforce/vulnreport.git
-           dest=/opt/vulnreport
+           dest={{vulnreport_install_dir}}
+
+    - command: cp {{vulnreport_install_dir}}/.env.example {{vulnreport_install_dir}}/.env
+      args:
+         creates: "{{vulnreport_install_dir}}/.env"
+
