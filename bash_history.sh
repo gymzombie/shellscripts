@@ -97,4 +97,4 @@ sed -i 's/^[ \t]*//;s/[ \t]*$//' somefile # Trim leading and trailing whitespace
 grep -n alpha $(grep -Irl beta *)   # grep for 'alpha', but only in files that also contain 'beta':
 echo "fuzzbuzz" | sed -e "s/u/i/2" # Replace the second occurrence of a regex match.
 make ; mpg123 hawaii-five-o-theme.mp3 # Play a song at the end of long running command to notify you
-
+while read line; do echo "line length is ${#line}"; done # While loops are good for reading data from stdin and running processes against it
