@@ -42,6 +42,7 @@ sudo apt-get install metasploit
 sudo apt-get install msfconsole
 ./quick-msf-setup 
 sudo ./quick-msf-setup 
+du -h --max-depth=1
 source ~/.bashrc
 ls -X    # Group files by extension
 ssh -l username -p 2222 localhost
