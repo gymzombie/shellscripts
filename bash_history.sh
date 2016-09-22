@@ -118,6 +118,9 @@ egrep -oi '#[a-f0-9]{6}' file.css | sort | uniq # extract all unique hex color c
 for i in {1..20} ; do rig|head -1 |tr A-Z a-z;done |while read f l;do echo ${f:0:1}${l}:$(pwgen 12 1);done # Gen 20 random users/passwords
 find . -mtime +$((365*5)) -maxdepth 1 -exec du -sb {} \; |awk '{s+=$1}END{print s}' # Total bytes used by 5+ year old directories in CWD
 ssh -D 9999 you@remotehost # Use -D to create a SOCKS5 tunnel inside your SSH connection. Some programs (like a web browser) can use these.
+for i in *.jpg; do identify "$i"; done # Use a for loop to iterate over a list of items (files, numbers, etc) and run processes accordingly.
+pgrep myscript.pl && echo still running || echo "done" | mail admin # Use the && and || logic operators for results based process control.
+zless, zgrep, zcat, zdiff # There are helper commands for dealing with compressed files (gz, bz2 and xz). They have a z, bz or xz prefix.
 
 
 
