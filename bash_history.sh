@@ -72,6 +72,7 @@ tail /var/log/lastlog
 tail /var/log/syslog
 sudo tail /var/log/syslog
 python -m SimpleHTTPServer 
+# Most below here are probably from https://twitter.com/climagic
 sudo bash -c 'swapoff -a && swapon -a' # After killing processing using up all your RAM on Linux (Firefox!!), move processes off of swap.
 sudo fdisk -l /dev/sd? # Show partitions of only physical SCSI/SATA/SCA drives and not other things like device mapper entries.
 <Ctrl-r>searchpattern # Every time you reuse a command from your command history, it saves a tree in the digital world. 
@@ -100,6 +101,31 @@ echo "fuzzbuzz" | sed -e "s/u/i/2" # Replace the second occurrence of a regex ma
 make ; mpg123 hawaii-five-o-theme.mp3 # Play a song at the end of long running command to notify you
 while read line; do echo "line length is ${#line}"; done # While loops are good for reading data from stdin and running processes against it
 find . -mtime +$((365*5)) -maxdepth 1 -exec du -sb {} \; |awk '{s+=$1}END{print s}' # Total bytes used by 5+ year old directories in CWD
+sed ':a;N;$!ba;s/\n/<br \/>/g' # Joins multiple lines and separates them with the string "<br />".
+sed -n '$p;h;n;p;g;p' # Swap each line of input with the next line of input.
+sed '9417q;d' dbdump.sql # Quickly print line 9417 of a large file without processing the whole file.
+sed '/Alice/!d; /Bob/!d' irc.log # Search irc.log for lines containing Alice and Bob regardless of their order in the line.
+cat access_log-*|awk '{print substr($4,5,8)}'|uniq -c|gnuplot -e "set terminal dumb;plot '-' using 1:xtic(2) with boxes" # Web request chart
+man find |sed -e '/./{H;$!d;}' -e 'x;/modified/!d;i==' # In the find man page, show whole paragraphs containing the word modified 
+printf "10^%d\n" {0..20} | bc | sed -e :a -e 's/\(.*[0-9]\)\([0-9]\{3\}\)/\1,\2/;ta' # Add separator commas to long numbers.
+sed -i -e :a -e '/\\$/N; s/\\\n//; ta' script.sh # Unwrap lines that end with a backslash in script.sh
+dmesg -wH # Live dmesg output in human readable format (colors, timing)
+sed -i -e '/^\s*#/!s/$val\>/$pid/g' getproc.pl # Replace all variables $val with $pid in getproc.pl, except on commented lines
+find . -atime -$(date +%j) -type f # Find files you haven't accessed so far this year in a directory. Requires atime attributes.
+sed 's/^/\t/' config.cfg | less # Print config.cfg tab indented to fix a bad console not letting you to see first few columns.
+fdupes -r Pictures > dupes.txt # Find file duplicates in 'Pictures' recursively based on size and mdsum and log them to dupes.txt.
+egrep -oi '#[a-f0-9]{6}' file.css | sort | uniq # extract all unique hex color codes from a CSS file
+for i in {1..20} ; do rig|head -1 |tr A-Z a-z;done |while read f l;do echo ${f:0:1}${l}:$(pwgen 12 1);done # Gen 20 random users/passwords
+find . -mtime +$((365*5)) -maxdepth 1 -exec du -sb {} \; |awk '{s+=$1}END{print s}' # Total bytes used by 5+ year old directories in CWD
+ssh -D 9999 you@remotehost # Use -D to create a SOCKS5 tunnel inside your SSH connection. Some programs (like a web browser) can use these.
+
+
+
+
+
+
+
+
 
 
 
