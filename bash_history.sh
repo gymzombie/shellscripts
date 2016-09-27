@@ -121,6 +121,8 @@ ssh -D 9999 you@remotehost # Use -D to create a SOCKS5 tunnel inside your SSH co
 for i in *.jpg; do identify "$i"; done # Use a for loop to iterate over a list of items (files, numbers, etc) and run processes accordingly.
 pgrep myscript.pl && echo still running || echo "done" | mail admin # Use the && and || logic operators for results based process control.
 zless, zgrep, zcat, zdiff # There are helper commands for dealing with compressed files (gz, bz2 and xz). They have a z, bz or xz prefix.
+find . -print | sort | sed 's;[^/]*/;|---;g;s;---|; |;g' # Generate output similar to 'tree' without using tree
+ps auxwwf | sed -n -r -e '/^.{64} \//h;/\\/H' -e '/^.{14} [8-9][0-9]\.[0-9]/{x;p}' # Print the high CPU process's family tree.
 
 
 
