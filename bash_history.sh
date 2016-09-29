@@ -123,7 +123,7 @@ pgrep myscript.pl && echo still running || echo "done" | mail admin # Use the &&
 zless, zgrep, zcat, zdiff # There are helper commands for dealing with compressed files (gz, bz2 and xz). They have a z, bz or xz prefix.
 find . -print | sort | sed 's;[^/]*/;|---;g;s;---|; |;g' # Generate output similar to 'tree' without using tree
 ps auxwwf | sed -n -r -e '/^.{64} \//h;/\\/H' -e '/^.{14} [8-9][0-9]\.[0-9]/{x;p}' # Print the high CPU process's family tree.
-
+sed -i '/^$/N;/\n$/N;//D' notes.txt # Compress consecutive blank lines down to just 2 in the file notes.txt
 
 
 
