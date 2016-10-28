@@ -126,8 +126,7 @@ ps auxwwf | sed -n -r -e '/^.{64} \//h;/\\/H' -e '/^.{14} [8-9][0-9]\.[0-9]/{x;p
 sed -i '/^$/N;/\n$/N;//D' notes.txt # Compress consecutive blank lines down to just 2 in the file notes.txt
 awk '{print $1}' data.txt # Print out just the first column (whitespace separated) of data.txt
 awk '{print $7}' access_log | sort | uniq -c | sort -rn | head -100 # Display top 100 files accessed on website.
-
-
+iptables -A INPUT -m state --state NEW -m geoip --src-cc CN -j DROP  # Does geolocated/georestricted Firewalls
 
 
 
