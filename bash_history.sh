@@ -127,7 +127,7 @@ sed -i '/^$/N;/\n$/N;//D' notes.txt # Compress consecutive blank lines down to j
 awk '{print $1}' data.txt # Print out just the first column (whitespace separated) of data.txt
 awk '{print $7}' access_log | sort | uniq -c | sort -rn | head -100 # Display top 100 files accessed on website.
 iptables -A INPUT -m state --state NEW -m geoip --src-cc CN -j DROP  # Does geolocated/georestricted Firewalls
-
+identify -format "%f F:%[EXIF:Flash]\n" *.jpg | egrep " F:(0|16|24|32)$" # Show photo filenames where no flash was used. Reqires Imagemagick
 
 
 
