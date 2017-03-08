@@ -80,6 +80,11 @@ hping3 --baseport 53 --destport 80 --syn 10.10.10.10  # Sent SYN packet from 53 
 # Nikto for web scans
 nikto --host 10.10.10.10
 
+rpcinfo -p 10.10.10.10 # enumerate listening RPC
+
+enum  # SMB Enumeration
+
+
 netstat -ant
 for file in $(ls -1 .); do if [ -s "$file" ]; then rm $file; fi; done
 sudo apt-get install java
