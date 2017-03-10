@@ -84,6 +84,24 @@ rpcinfo -p 10.10.10.10 # enumerate listening RPC
 
 enum  # SMB Enumeration
 
+## Incident Response - Basic info gathering:
+env
+date
+uptime
+uname -a
+vmstat
+netstat -an4
+netstat -an6
+lsof -ni4
+who
+w 
+ps aux
+last -adi -f /var/log/wtmp
+last -adi -f /var/log/btmp
+# End basic IR 
+
+
+
 
 netstat -ant
 for file in $(ls -1 .); do if [ -s "$file" ]; then rm $file; fi; done
