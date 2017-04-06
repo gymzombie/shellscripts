@@ -102,7 +102,7 @@ last -adi -f /var/log/btmp
 
 
 
-
+# General admin and whatnot
 netstat -ant
 for file in $(ls -1 .); do if [ -s "$file" ]; then rm $file; fi; done
 sudo apt-get install java
@@ -115,6 +115,7 @@ sudo ./quick-msf-setup
 du -h --max-depth=1
 source ~/.bashrc
 ls -X    # Group files by extension
+ls -S    # List files in descending order of size
 ssh -l username -p 2222 localhost
 ssh root@127.0.0.1 -p 2244
 uname -a
