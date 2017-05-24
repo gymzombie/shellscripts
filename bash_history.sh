@@ -101,6 +101,16 @@ last -adi -f /var/log/btmp
 # End basic IR 
 
 
+# Volatility from https://downloads.volatilityfoundation.org//releases/2.4/CheatSheet_v2.4.pdf
+VistaSP2x86
+
+# Reverse Engineering  (Hints from https://trailofbits.github.io/ctf/exploits/binary2.html )
+objdump -d datafile.txt
+objdump -D -M intel datafile.txt
+hexeditor datafile.txt
+readelf -a datafile.txt
+nm datafile.txt
+r2   # Full radare2 book here: https://radare.gitbooks.io/radare2book/content/
 
 # General admin and whatnot
 netstat -ant
