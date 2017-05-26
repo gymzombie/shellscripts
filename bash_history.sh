@@ -102,7 +102,9 @@ last -adi -f /var/log/btmp
 
 
 # Volatility from https://downloads.volatilityfoundation.org//releases/2.4/CheatSheet_v2.4.pdf
-VistaSP2x86
+volatility -f ./WindowsVista.vmem --profile=VistaSP2x86 pslist
+volatility -f ./WindowsVista.vmem --profile=VistaSP2x86 sessions
+
 
 # Reverse Engineering  (Hints from https://trailofbits.github.io/ctf/exploits/binary2.html )
 objdump -d datafile.txt
