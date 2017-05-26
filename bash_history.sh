@@ -122,6 +122,13 @@ xxd datafile.txt
 peeppdf Phishing-attachment.pdf
 pdf-parser Phishing-attachment.pdf
 
+# Download OLETools to pull apart malicious Office documents:
+python olebrowse.py
+python olevba.py 
+python oledump.py mailicious-file.doc
+
+java -jar -Xmx1024m /opt/burpsuitepro/burpsuite*
+
 
 # Steganography
 steghide
@@ -170,6 +177,16 @@ tail /var/log/lastlog
 tail /var/log/syslog
 sudo tail /var/log/syslog
 python -m SimpleHTTPServer 
+
+
+mount -v -o offset=123456 -t ext4 ctf-image.img mountpoint/
+
+
+nfspysh -o server=192.168.1.2:/
+showmount -e 192.168.1.2    
+
+
+
 # Most below here are probably from https://twitter.com/climagic
 sudo bash -c 'swapoff -a && swapon -a' # After killing processing using up all your RAM on Linux (Firefox!!), move processes off of swap.
 sudo fdisk -l /dev/sd? # Show partitions of only physical SCSI/SATA/SCA drives and not other things like device mapper entries.
