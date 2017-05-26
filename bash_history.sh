@@ -107,12 +107,27 @@ volatility -f ./WindowsVista.vmem --profile=VistaSP2x86 sessions
 
 
 # Reverse Engineering  (Hints from https://trailofbits.github.io/ctf/exploits/binary2.html )
+file datafile.txt
+strings datafile.txt
 objdump -d datafile.txt
 objdump -D -M intel datafile.txt
 hexeditor datafile.txt
 readelf -a datafile.txt
 nm datafile.txt
+binwalk -e imagefile.img
 r2   # Full radare2 book here: https://radare.gitbooks.io/radare2book/content/
+xxd datafile.txt
+
+
+peeppdf Phishing-attachment.pdf
+pdf-parser Phishing-attachment.pdf
+
+
+# Steganography
+steghide
+stegsolve
+stegdetect
+
 
 # General admin and whatnot
 netstat -ant
