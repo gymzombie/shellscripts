@@ -180,6 +180,14 @@ sudo tail /var/log/syslog
 python -m SimpleHTTPServer 
 
 
+mysqldump -u dbuser -p database_name > ./databasebackup.sql   # export
+mysql -u dbuser –p database_name < ./databasebackup.sql   # import
+mysql -u root -p
+  create database database_name;
+  grant all privileges on database_name.* to 'dbuser'@'localhost' identified by "P@ssw0rd"; 
+  flush privileges;
+
+
 mount -v -o offset=123456 -t ext4 ctf-image.img mountpoint/
 
 
