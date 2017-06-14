@@ -178,6 +178,7 @@ tail /var/log/lastlog
 tail /var/log/syslog
 sudo tail /var/log/syslog
 python -m SimpleHTTPServer 
+du --all --human-readable --one-file-system /var/log | sort --reverse --human-numeric-sort | head --lines=25 # Sorting by human readable sizes
 
 
 mysqldump -u dbuser -p database_name > ./databasebackup.sql   # export
