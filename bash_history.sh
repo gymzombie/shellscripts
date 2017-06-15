@@ -179,7 +179,7 @@ tail /var/log/syslog
 sudo tail /var/log/syslog
 python -m SimpleHTTPServer 
 du --all --human-readable --one-file-system /var/log | sort --reverse --human-numeric-sort | head --lines=25 # Sorting by human readable sizes
-
+mount -o rw,remount /  # Remount a read-only filesystem as read-write
 
 mysqldump -u dbuser -p database_name > ./databasebackup.sql   # export
 mysql -u dbuser –p database_name < ./databasebackup.sql   # import
