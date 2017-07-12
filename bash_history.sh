@@ -181,7 +181,7 @@ python -m SimpleHTTPServer
 du --all --human-readable --one-file-system /var/log | sort --reverse --human-numeric-sort | head --lines=25 # Sorting by human readable sizes
 mount -o rw,remount /  # Remount a read-only filesystem as read-write
 for i in `seq 1 255`; do ping -c 1 192.168.1.$i | tr \\n ' ' | awk '/1 received/ {print $2}'; done # Ping Sweep a /24
-
+`gunzip -c /var/log/apt/history.log.*.gz | grep 'apt-get install' | cut -f4- -d" " | tr ' ' $'\n' | sort -u`  # Show installed packages
 
 
 mysqldump -u dbuser -p database_name > ./databasebackup.sql   # export
