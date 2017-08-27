@@ -195,6 +195,9 @@ mysql -u root -p
 mount -v -o offset=123456 -t ext4 ctf-image.img mountpoint/
 
 
+mount -t cifs //fileserver/c$/ /media/folder/ -o username=fileserver/user1  # Mount a cifs share locally
+
+
 nfspysh -o server=192.168.1.2:/
 showmount -e 192.168.1.2    
 
