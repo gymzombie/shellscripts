@@ -178,6 +178,9 @@ tail /var/log/lastlog
 tail /var/log/syslog
 sudo tail /var/log/syslog
 python -m SimpleHTTPServer 
+
+curl --location-trusted --ntlm -u user:pass http://www.red.com # Authenticate to a Bluecoat or Mcafee proxy using pass-thru NTLM
+
 du --all --human-readable --one-file-system /var/log | sort --reverse --human-numeric-sort | head --lines=25 # Sorting by human readable sizes
 mount -o rw,remount /  # Remount a read-only filesystem as read-write
 for i in `seq 1 255`; do ping -c 1 192.168.1.$i | tr \\n ' ' | awk '/1 received/ {print $2}'; done # Ping Sweep a /24
