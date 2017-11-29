@@ -194,6 +194,7 @@ mysql -u root -p
   grant all privileges on database_name.* to 'dbuser'@'localhost' identified by "P@ssw0rd"; 
   flush privileges;
 
+  SET PASSWORD FOR 'dbuser'@'localhost' = 'G00dP@ssw0rd';
 
 
 mount -v -o offset=123456 -t ext4 ctf-image.img mountpoint/
