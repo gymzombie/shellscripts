@@ -197,7 +197,12 @@ mysql -u root -p
   SET PASSWORD FOR 'dbuser'@'localhost' = 'G00dP@ssw0rd';
   
   SELECT User, Host, authentication_string FROM mysql.user;    # show db users
+  
+  DROP USER 'jeffrey'@'localhost';
 
+  INSERT INTO user (user, host, password)                       # Add additional source hosts to a user accoutn
+  SELECT U.user, '10.x' AS NHost, U.password FROM user AS U 
+  FLUSH PRIVILEGES;
 
 
 mount -v -o offset=123456 -t ext4 ctf-image.img mountpoint/
