@@ -195,6 +195,9 @@ mysql -u root -p
   flush privileges;
 
   SET PASSWORD FOR 'dbuser'@'localhost' = 'G00dP@ssw0rd';
+  
+  SELECT User, Host, authentication_string FROM mysql.user;    # show db users
+
 
 
 mount -v -o offset=123456 -t ext4 ctf-image.img mountpoint/
