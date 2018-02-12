@@ -223,6 +223,7 @@ python examples/psexec.py -target-ip 192.168.1.2 DOMAIN/user:P@ssw0rd "powershel
 
 find . -type f -exec grep -i -I password {} /dev/null \;  # Hunt a system for passwords stored in scripts
 
+tar xzcf - whatever/ | ssh user@host 'cat > whatever.tar.gz' # Compress a directory and transfer the .tar.gz to another host securely over SSH without creating a temp file or taking up any disk space on the client machine (useful for when you have zero free space on the client)
 
 # Most below here are probably from https://twitter.com/climagic
 sudo bash -c 'swapoff -a && swapon -a' # After killing processing using up all your RAM on Linux (Firefox!!), move processes off of swap.
