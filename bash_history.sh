@@ -277,7 +277,7 @@ split --lines=50 foo.txt  # Split a text file into files with 50 lines each
 ping -c100 4.2.2.2 | sponge | pee head tail # The pee command can run head and tail on same input. sponge waits for all the data first.
 diff <(ssh server1 "cat /etc/fstab") <(ssh server2 "cat /etc/fstab") # compare two files on two different servers without downloading them
 while true; do echo "<html><body><h1>Webserver</h1></body></html>" | ncat -l -p 80; done # One-line web server, courtesy of netcat
-
+timeout 1 bash -c '</dev/tcp/216.58.207.46/443 && echo Port is open || echo Port is closed' || echo Connection timeout  # How to test a TCP (or UDP) remote port without telnet or netcat
 
 
 # Sed
