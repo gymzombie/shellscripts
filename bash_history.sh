@@ -55,6 +55,8 @@ nmap -n -sC --script=sshv1.nse 10.10.10.0/24 -p 22  # Check for SSHv1
 nmap -n -sC --script=nbtstat.nse 10.10.10.0/24  # Looks for Netbios traffic 
 nmap -sV --script ssl-enum-ciphers -p 443 10.10.10.10
 nmap Pn -p 80 --script http-drupal-enum www.target.com  # Drupal enumeration script
+nmap -oX nmapOutput.xml | xsltproc nmapOutput.xml -o nmapWebPage.html # Convert nmap scans to HTML web pages (easy export into PDF, etc).
+
 
 # NetCat
 nc -l 8888  # Listen for connections on this port (Or -L on Windows), 
