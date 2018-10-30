@@ -301,4 +301,4 @@ awk '{print $7}' access_log | sort | uniq -c | sort -rn | head -100 # Display to
 
 exiftool -all= photo.jpg # Remove all the exif metadata tags from photo.jpg to improve privacy before uploading.
 
-
+nmap --open -p 8008 192.168.1.0/24 | awk '/is up/ {print up}; {gsub (/\(|\)/,""); up = $NF}' | xargs -I % curl -Lv -H Content-Type:application/json --data-raw '{"params":"now"}' http://%:8008/setup/reboot # Scan for and Reboot Google Home Devices
