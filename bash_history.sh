@@ -182,6 +182,8 @@ tail /var/log/syslog
 sudo tail /var/log/syslog
 python -m SimpleHTTPServer 
 cat /dev/urandom | env LC_CTYPE=C tr -dc a-zA-Z0-9 | head -c 60; echo # Generate a random password
+comm -23 <(ls -1 wiki/extensions/) <(ls -1 mediawiki-1.31.1/extensions) # Figure out what mediawiki extensions are in the current extensions directory that don't exist in the default distribution.
+
 
 curl --location-trusted --ntlm -u user:pass http://www.red.com # Authenticate to a Bluecoat or Mcafee proxy using pass-thru NTLM
 
