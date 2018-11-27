@@ -297,6 +297,7 @@ sed -i -e :a -e '/\\$/N; s/\\\n//; ta' script.sh # Unwrap lines that end with a 
 sed 's/^/\t/' config.cfg | less # Print config.cfg tab indented to fix a bad console not letting you to see first few columns.
 sed -n '3,7p' somefile  # The sed command p prints. For example, print lines 3 through 7 of a file: 
 sed -i '/^$/N;/\n$/N;//D' notes.txt # Compress consecutive blank lines down to just 2 in the file notes.txt
+sed 's/apple/orange/3' somefile # Change the third 'apple' in each record to 'orange'
 
 
 awk '{print $1}' data.txt # Print out just the first column (whitespace separated) of data.txt
